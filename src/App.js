@@ -1,24 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  let [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    // setEvents('bye');
+    // events = 'bye';
+    fetch('https://api.hackillinois.org/event/').then(res => res.json()).then(json => {
+      setEvents(json.events)
+    })
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {events.map(event => (
+        <div>
+          <h2>{event.name}</h2>
+          <p>{event.description}</p>
+        </div>
+      ))}
     </div>
   );
 }
