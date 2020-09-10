@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -19,6 +18,7 @@ function App() {
         <div>
           <h2>{event.name}</h2>
           <p>{event.description}</p>
+          <div>{new Date(event.startTime * 1000).toDateString()} - {new Date(event.endTime * 1000).toDateString()}</div>
         </div>
       ))}
     </div>
